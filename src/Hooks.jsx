@@ -2,42 +2,45 @@ import { useState } from 'react'
 
 // props must be added as a parameter in the function in order to access props!!!
 export default function Hooks(props) {
-    const [value, setValue] = useState('Gabe')
-    const [age, setAge] = useState(27)
-    const [array, setArray] = useState(['cat', 'dog', 'bird'])
-    const [drill, setDrill] = useState(props.drill)
+    const [user, setUser] = useState({
+        name: 'Gabe',
+        favFood: '🍔'
+    })
 
-    const handleAge = () => {
-        setAge(age + 1)
+
+    let handleUser = (e) => {
+        setUser({...user, name: e.target.value})
     }
 
-    const handleFerret = () => {
-        setArray([...array, 'ferret'])
+    let handleFood = (e) => {
+        setUser({...user, favFood: e.target.value})
     }
-
-    let spreadArray = [...array]
-    console.log(spreadArray)
-
-    const handleDrill = () => {
-        setDrill(drill + 'r')
-    }
-
+    
     return ( 
         <>
-            <h1>State!</h1>
-            <h2>{value} is {age} human years old</h2>
-            <button onClick={handleAge}> Ageifier! </button>
+            <h1>{user.name} is a fan of {user.favFood}</h1> 
+            <form>
+                <label htmlFor="name"> user name:</label>
 
-            <ul>
-                {array.map((pet) => {
-                return(
-                    <li>{pet}</li>
-                )
-            })}
-            </ul>
-            <button onClick={handleFerret}>Add Ferret</button>
-            <h3>{drill}</h3>
-            <button onClick={handleDrill}>Keep Drilling!</button>
+                <input 
+                id="name"
+                type="text"
+                placeholder="enter name here"
+                value={user.name}
+                onChange={handleUser} />
+                
+                <label htmlFor="favFood"> fave Food:</label>
+
+                <input 
+                id="name"
+                type="text"
+                placeholder="enter name here"
+                value={user.favFood}
+                onChange={handleFood} />
+            
+                
+            </form>
+            
         </>
      );
 }
